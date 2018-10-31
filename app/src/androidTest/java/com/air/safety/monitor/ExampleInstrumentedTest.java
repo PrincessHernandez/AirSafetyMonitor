@@ -1,4 +1,4 @@
-package com.example.kenchen.navigationdrawer;
+package com.air.safety.monitor;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

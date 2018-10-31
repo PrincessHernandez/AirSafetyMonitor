@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kenchen.navigationdrawer">
+    package="com.air.safety.monitor">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -25,7 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-        <activity android:name=".LauncherActivity">
+        <activity android:name="com.air.safety.monitor.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name="com.air.safety.monitor.LoginActivity"></activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.air.safety.monitor.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -54,7 +54,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.air.safety.monitor.MapsActivity"
             android:label="@string/title_activity_maps" />
     </application>
 

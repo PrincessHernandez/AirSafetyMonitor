@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.kenchen.navigationdrawer"
+        applicationId "com.air.safety.monitor"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
