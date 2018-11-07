@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up);
+        setContentView(R.layout.activity_register);
 
         PD = new ProgressDialog(this);
         PD.setMessage("Loading...");
@@ -41,10 +41,10 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         }
 
-        inputEmail = (EditText) findViewById(R.id.et_email);
-        inputPassword = (EditText) findViewById(R.id.et_password);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_signin);
+        inputEmail = (EditText) findViewById(R.id.email);
+        inputPassword = (EditText) findViewById(R.id.password);
+        btnSignUp = (Button) findViewById(R.id.sign_up_button);
+        btnLogin = (Button) findViewById(R.id.sign_in_button);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override            public void onClick(View view) {

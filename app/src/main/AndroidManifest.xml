@@ -34,7 +34,7 @@
         </activity>
 
         <activity android:name="com.air.safety.monitor.LoginActivity"></activity>
-
+        <activity android:name="com.air.safety.monitor.RegisterActivity"></activity>
         <activity
             android:name="com.air.safety.monitor.MainActivity"
             android:label="@string/app_name"
