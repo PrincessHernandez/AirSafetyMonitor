@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (email.getText().toString().equals("") &&
-                                pass.getText().toString().equals("")) {
+                        if (email.getText().toString().equals("humber@gmail.com") &&
+                                pass.getText().toString().equals("password")) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
 

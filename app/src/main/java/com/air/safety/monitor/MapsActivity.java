@@ -25,6 +25,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Bundle bundle = getIntent().getExtras();
 
+
     }
 
 
@@ -36,5 +37,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng humberCollege = new LatLng(43.731380, -79.597420);
         mMap.addMarker(new MarkerOptions().position(humberCollege).title("Marker at Humber"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
+
     }
 }
