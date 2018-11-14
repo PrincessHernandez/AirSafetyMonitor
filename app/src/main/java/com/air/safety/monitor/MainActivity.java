@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.annotation.NonNull;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,16 +27,21 @@ public class MainActivity extends AppCompatActivity
 
 //    private  static int SPLASH_TIME_OUT = 3000;
 
-    FirebaseAuth auth;
+    //FirebaseAuth auth;
     FirebaseUser user;
+
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private static final String TAG = "login out";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+        //auth = FirebaseAuth.getInstance();
+        //user = auth.getCurrentUser();
+        setupFirebaseListener();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +68,39 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, new CurrentDataFragment())
                 .commit();
+    }
+
+    private void setupFirebaseListener() {
+        Log.d(TAG, "setupFirebaseListener: setting up the auth state listener.");
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged: signed_in: " + user.getUid());
+                } else {
+                    Log.d(TAG, "onAuthStateChanged: signed_out");
+                    Toast.makeText(MainActivity.this, "Signed out", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mAuthStateListener != null){
+            FirebaseAuth.getInstance().removeAuthStateListener(mAuthStateListener);
+        }
     }
 
     @Override
@@ -126,6 +167,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_logout) {
+
+            Log.d(TAG, "onClick: attempting to sign out the user.");
+            FirebaseAuth.getInstance().signOut();
+
+            /*
             auth.getInstance().signOut();
             FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
                 @Override
@@ -137,6 +183,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             };
+            */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
