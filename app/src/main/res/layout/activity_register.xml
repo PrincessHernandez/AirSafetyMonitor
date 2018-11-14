@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FireBase Auth Register"
+        android:text="Create a New Account"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="16sp"
@@ -21,44 +21,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
-            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-
-
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
-
+            android:hint="Email"
+            android:id="@+id/input_email"
+            android:layout_marginTop="15dp"/>
 
     </android.support.design.widget.TextInputLayout>
-
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
-            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:hint="Password"
-            android:imeActionId="@+id/login"
-            android:imeOptions="actionUnspecified"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
-
+            android:inputType="text"
+            android:hint="Full Name"
+            android:id="@+id/input_name"
+            android:layout_marginTop="15dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:id="@+id/input_password"
+            android:layout_marginTop="15dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:id="@+id/input_confirm_password"
+            android:layout_marginTop="15dp"/>
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/sign_up_button"

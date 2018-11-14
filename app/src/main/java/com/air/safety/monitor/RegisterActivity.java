@@ -1,6 +1,7 @@
 package com.air.safety.monitor;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,17 +19,38 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = "RegisterActivity";
+    /*
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private Button btnSignUp, btnLogin;
-    private ProgressDialog PD;
+    private ProgressDialog PD;*/
 
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    //widgets
+    private EditText mEmail, mName,mPassword, mConfirmPassword;
+    private Button mRegister;
+
+    //vars
+    private Context mContext;
+    private String email, name, password;
+    private User mUser;
 
 
     @Override    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mRegister = (Button) findViewById(R.id.btn_register);
+        mEmail = (EditText) findViewById(R.id.input_email);
+        mPassword = (EditText) findViewById(R.id.input_password);
+        mConfirmPassword = (EditText) findViewById(R.id.input_confirm_password);
+        mName = (EditText) findViewById(R.id.input_name);
+        mContext = RegisterActivity.this;
+        mUser = new User();
+        Log.d(TAG, "onCreate: started");
+/*
         PD = new ProgressDialog(this);
         PD.setMessage("Loading...");
         PD.setCancelable(true);
@@ -90,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
+*/
     }
 
     @Override
