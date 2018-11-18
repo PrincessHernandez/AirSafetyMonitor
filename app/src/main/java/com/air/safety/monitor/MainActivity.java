@@ -17,10 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.annotation.NonNull;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,10 +31,14 @@ public class MainActivity extends AppCompatActivity
 //    private  static int SPLASH_TIME_OUT = 3000;
 
     //FirebaseAuth auth;
-    FirebaseUser user;
+    //FirebaseUser user;
 
+    TextView textViewToChange;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private static final String TAG = "login out";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +48,6 @@ public class MainActivity extends AppCompatActivity
         //auth = FirebaseAuth.getInstance();
         //user = auth.getCurrentUser();
         setupFirebaseListener();
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +69,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -165,6 +173,8 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_settings) {
+            Intent i = new Intent(this,SettingsActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_logout) {
 

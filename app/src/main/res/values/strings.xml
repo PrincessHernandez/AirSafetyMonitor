@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ASMR</string>
+    <string name="app_name">ASM</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -23,4 +23,5 @@
     </string>
 
     <string name="node_users">users</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>

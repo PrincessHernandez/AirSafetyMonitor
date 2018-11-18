@@ -25,21 +25,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-        <activity android:name="com.air.safety.monitor.LauncherActivity">
+        <activity android:name=".LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.air.safety.monitor.LoginActivity"></activity>
-        <activity android:name="com.air.safety.monitor.RegisterActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity
-            android:name="com.air.safety.monitor.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -54,8 +52,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.air.safety.monitor.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

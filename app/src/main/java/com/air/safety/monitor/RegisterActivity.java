@@ -146,7 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
                     // User is authenticated
                     Log.d(TAG, "onAuthStateChanged: signed_in: " + user.getUid());
 
-
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged: signed_out");

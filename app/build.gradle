@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
@@ -43,3 +44,5 @@ repositories {
 
 //apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'kotlin-android-extensions'
