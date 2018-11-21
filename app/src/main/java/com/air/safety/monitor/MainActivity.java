@@ -156,10 +156,9 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_maps) {
-            Intent i = new Intent(this,MapsActivity.class);
-            Bundle bundle = new Bundle();
-            i.putExtras(bundle);
-            startActivity(i);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new MapsFragment())
+                    .commit();
 
         } else if (id == R.id.nav_current_data) {
             fragmentManager.beginTransaction()
