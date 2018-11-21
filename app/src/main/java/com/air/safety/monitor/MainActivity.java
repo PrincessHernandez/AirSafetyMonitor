@@ -1,7 +1,9 @@
 package com.air.safety.monitor;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity
     TextView textViewToChange;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private static final String TAG = "login out";
-
-
 
 
     @Override
@@ -171,6 +171,21 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new HourlyDataFragment())
                     .commit();
+
+        } else if (id == R.id.nav_call) {
+            String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(this); // Need to change the build to API 19
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.putExtra("address", "14165551234");
+            sendIntent.setType("text/plain");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "text: help2");
+            startActivity(sendIntent);
+
+            if (defaultSmsPackageName != null)// Can be null in case that there is no default, then the user would be able to choose
+            // any app that support this intent.
+            {
+                sendIntent.setPackage(defaultSmsPackageName);
+            }
+            startActivity(sendIntent);
 
         } else if (id == R.id.nav_settings) {
             Intent i = new Intent(this,SettingsActivity.class);

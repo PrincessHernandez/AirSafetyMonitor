@@ -22,7 +22,7 @@
             android:title="Hourly Data" />
         <item
             android:id="@+id/nav_call"
-            android:icon="@drawable/ic_menu_phone"
+            android:icon="@drawable/ic_menu_message"
             android:title="Emergency Call" />
     </group>
 
