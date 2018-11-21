@@ -62,7 +62,9 @@ public class SettingsActivity extends AppCompatActivity {
         mRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRef.setValue("Hello, World!");
+                EditText sdata = (EditText) findViewById(R.id.senddata);
+                String sinput = sdata.getText().toString();
+                myRef.setValue(sinput);
 
             }
         });
