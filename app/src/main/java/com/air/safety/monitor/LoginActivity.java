@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     //Firebase
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
     //widgets
     private EditText mEmail, mPassword;
     private Button mLogin, mRegister;

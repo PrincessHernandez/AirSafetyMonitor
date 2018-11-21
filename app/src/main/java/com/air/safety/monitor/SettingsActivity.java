@@ -43,11 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "test";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("test");
-
-
-
-
+    DatabaseReference myRef = database.getReference("data test");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText sdata = (EditText) findViewById(R.id.senddata);
                 String sinput = sdata.getText().toString();
+
                 myRef.setValue(sinput);
 
             }
@@ -96,4 +93,5 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
 }

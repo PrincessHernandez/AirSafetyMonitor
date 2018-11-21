@@ -18,4 +18,6 @@ public class CurrentDataFragment extends Fragment{
         myView = inflater.inflate(R.layout.current_data_layout, container, false);
         return myView;
     }
+
+
 }
