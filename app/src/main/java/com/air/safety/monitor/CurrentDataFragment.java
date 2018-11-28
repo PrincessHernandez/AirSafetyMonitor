@@ -92,7 +92,58 @@ public class CurrentDataFragment extends Fragment{
         pieChartData_co.setHasCenterCircle(true).setCenterText1("CO").setCenterText1FontSize(25);
         pieChartView_co.setPieChartData(pieChartData_co);
 
+        setListeners();
+
         return myView;
+    }
+
+    private void setListeners() {
+        btnCData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = ref.push().getKey();
+
+                int pm = Integer.parseInt(pmVal.getText().toString());
+                int voc = Integer.parseInt(vocVal.getText().toString());
+                int co2 = Integer.parseInt(co2Val.getText().toString());
+                int co = Integer.parseInt(coVal.getText().toString());
+
+                CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
+
+                ref.child(id).setValue(currentValue);
+            }
+        });
+    }
+
+}
+
+class CurrentValue {
+    int pmValue, vocValue, co2Value, coValue;
+
+    public CurrentValue() {
+    }
+
+    public CurrentValue(int pmValue,int vocValue,int co2Value,int coValue) {
+        this.pmValue = pmValue;
+        this.vocValue = vocValue;
+        this.co2Value = co2Value;
+        this.coValue = coValue;
+    }
+
+    public int getPmValue() {
+        return pmValue;
+    }
+
+    public int getVocValue() {
+        return vocValue;
+    }
+
+    public int getCo2Value() {
+        return co2Value;
+    }
+
+    public int getCoValue() {
+        return coValue;
     }
 
 
