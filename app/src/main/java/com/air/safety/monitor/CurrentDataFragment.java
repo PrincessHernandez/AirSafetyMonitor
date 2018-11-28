@@ -134,19 +134,19 @@ public class CurrentDataFragment extends Fragment{
 
                 pieData_pm.clear();
                 pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED));
-                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.BLUE));
+                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
 
                 pieData_voc.clear();
                 pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
-                pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.BLUE));
+                pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
 
                 pieData_co2.clear();
                 pieData_co2.add(new SliceValue(currentValue.getCo2Value(), Color.RED));
-                pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.BLUE));
+                pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
 
                 pieData_co.clear();
                 pieData_co.add(new SliceValue(currentValue.getCoValue(), Color.RED));
-                pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.BLUE));
+                pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
             }
 
             @Override

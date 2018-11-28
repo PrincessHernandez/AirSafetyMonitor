@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_pm"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/chart_voc" />
+
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_voc"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/chart_co2" />
+
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_co2"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/chart_co" />
+
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_co"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="55dp" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Current Data"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/pmVal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chart_pm"
+        android:layout_below="@+id/chart_pm"
+        android:ems="10"
+        android:hint="pm"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/vocVal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pmVal"
+        android:layout_toEndOf="@+id/chart_pm"
+        android:ems="10"
+        android:hint="voc"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/co2Val"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pmVal"
+        android:layout_toEndOf="@+id/chart_voc"
+        android:ems="10"
+        android:hint="co2"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/coVal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pmVal"
+        android:layout_toEndOf="@+id/chart_co2"
+        android:ems="10"
+        android:hint="co"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btn_current_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginEnd="19dp"
+        android:text="C Data" />
+
+</RelativeLayout>
