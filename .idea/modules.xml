@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AirSafetyMonitor.iml" filepath="$PROJECT_DIR$/AirSafetyMonitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AirSafetyMonitor-ba65b80286fb138db1d59d2b68cd4449a2a38a1b.iml" filepath="$PROJECT_DIR$/AirSafetyMonitor-ba65b80286fb138db1d59d2b68cd4449a2a38a1b.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -6,42 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_pm"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="126dp" />
+        android:layout_marginTop="126dp"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_voc"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/progressBar"
+        android:layout_alignTop="@+id/chart_pm"
         android:layout_marginEnd="50dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar3"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_co2"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/progressBar"
+        android:layout_alignStart="@+id/chart_pm"
         android:layout_marginBottom="165dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar4"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
-        android:layout_alignStart="@+id/progressBar2"
-        android:layout_alignTop="@+id/progressBar3" />
+    <lecho.lib.hellocharts.view.PieChartView
+        android:id="@+id/chart_co"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_alignStart="@+id/chart_voc"
+        android:layout_alignTop="@+id/chart_co2" />
 
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"

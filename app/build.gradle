@@ -33,6 +33,7 @@ dependencies {
     //compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.jjoe64:graphview:4.2.2'
 
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.4'
