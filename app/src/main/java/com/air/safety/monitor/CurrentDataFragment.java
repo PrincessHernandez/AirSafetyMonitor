@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class CurrentDataFragment extends Fragment{
     List<SliceValue> pieData_pm, pieData_voc, pieData_co2, pieData_co;
     PieChartData pieChartData_pm, pieChartData_voc, pieChartData_co2, pieChartData_co;
 
+    private static final String TAG = "tag me";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,8 +58,7 @@ public class CurrentDataFragment extends Fragment{
 // ----------------- PM
         pieChartView_pm = myView.findViewById(R.id.chart_pm);
         pieData_pm = new ArrayList<>();
-        pieData_pm.add(new SliceValue(15, Color.BLUE));
-        pieData_pm.add(new SliceValue(10, Color.RED));
+        pieData_pm.add(new SliceValue(100));
 
         pieChartData_pm = new PieChartData(pieData_pm);
         pieChartData_pm.setHasCenterCircle(true).setCenterText1("PM").setCenterText1FontSize(25);
@@ -64,8 +67,7 @@ public class CurrentDataFragment extends Fragment{
 // ----------------- VOC
         pieChartView_voc = myView.findViewById(R.id.chart_voc);
         pieData_voc = new ArrayList<>();
-        pieData_voc.add(new SliceValue(25, Color.BLUE));
-        pieData_voc.add(new SliceValue(10, Color.RED));
+        pieData_voc.add(new SliceValue(100));
 
         pieChartData_voc = new PieChartData(pieData_voc);
         pieChartData_voc.setHasCenterCircle(true).setCenterText1("VOC").setCenterText1FontSize(25);
@@ -74,8 +76,7 @@ public class CurrentDataFragment extends Fragment{
 // ----------------- CO2
         pieChartView_co2 = myView.findViewById(R.id.chart_co2);
         pieData_co2 = new ArrayList<>();
-        pieData_co2.add(new SliceValue(25, Color.BLUE));
-        pieData_co2.add(new SliceValue(60, Color.RED));
+        pieData_co2.add(new SliceValue(100));
 
         pieChartData_co2 = new PieChartData(pieData_co2);
         pieChartData_co2.setHasCenterCircle(true).setCenterText1("CO2").setCenterText1FontSize(25);
@@ -85,8 +86,7 @@ public class CurrentDataFragment extends Fragment{
 // ----------------- CO
         pieChartView_co = myView.findViewById(R.id.chart_co);
         pieData_co = new ArrayList<>();
-        pieData_co.add(new SliceValue(22, Color.BLUE));
-        pieData_co.add(new SliceValue(78, Color.RED));
+        pieData_co.add(new SliceValue(100));
 
         pieChartData_co = new PieChartData(pieData_co);
         pieChartData_co.setHasCenterCircle(true).setCenterText1("CO").setCenterText1FontSize(25);
@@ -110,7 +110,42 @@ public class CurrentDataFragment extends Fragment{
 
                 CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
 
-                ref.child(id).setValue(currentValue);
+                ref.setValue(currentValue);
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        final int pm_r = 17, pm_b = 18;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CurrentValue currentValue = dataSnapshot.getValue(CurrentValue.class);
+                pieChartData_co.setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
+
+
+                pieData_pm.clear();
+                pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED).setLabel("Red"));
+                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.BLUE).setLabel("Blue"));
+
+                pieData_voc.clear();
+                pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
+                pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.BLUE));
+
+                pieData_co2.clear();
+                pieData_co2.add(new SliceValue(currentValue.getCo2Value(), Color.RED));
+                pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.BLUE));
+
+                pieData_co.clear();
+                pieData_co.add(new SliceValue(currentValue.getCoValue(), Color.RED));
+                pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.BLUE));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
