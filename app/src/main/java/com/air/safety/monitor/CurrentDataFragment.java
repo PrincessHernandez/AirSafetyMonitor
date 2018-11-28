@@ -20,6 +20,8 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,8 @@ public class CurrentDataFragment extends Fragment{
     Button btnCData;
     FirebaseDatabase database;
     DatabaseReference ref;
+
+    FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
 
     PieChartView pieChartView_pm, pieChartView_voc, pieChartView_co2, pieChartView_co;
     List<SliceValue> pieData_pm, pieData_voc, pieData_co2, pieData_co;
@@ -61,6 +65,7 @@ public class CurrentDataFragment extends Fragment{
         pieData_pm.add(new SliceValue(100));
 
         pieChartData_pm = new PieChartData(pieData_pm);
+        pieChartData_pm.setHasLabels(true).setValueLabelTextSize(14);
         pieChartData_pm.setHasCenterCircle(true).setCenterText1("PM").setCenterText1FontSize(25);
         pieChartView_pm.setPieChartData(pieChartData_pm);
 
@@ -70,6 +75,7 @@ public class CurrentDataFragment extends Fragment{
         pieData_voc.add(new SliceValue(100));
 
         pieChartData_voc = new PieChartData(pieData_voc);
+        pieChartData_voc.setHasLabels(true).setValueLabelTextSize(14);
         pieChartData_voc.setHasCenterCircle(true).setCenterText1("VOC").setCenterText1FontSize(25);
         pieChartView_voc.setPieChartData(pieChartData_voc);
 
@@ -79,6 +85,7 @@ public class CurrentDataFragment extends Fragment{
         pieData_co2.add(new SliceValue(100));
 
         pieChartData_co2 = new PieChartData(pieData_co2);
+        pieChartData_co2.setHasLabels(true).setValueLabelTextSize(14);
         pieChartData_co2.setHasCenterCircle(true).setCenterText1("CO2").setCenterText1FontSize(25);
         pieChartView_co2.setPieChartData(pieChartData_co2);
 
@@ -89,6 +96,7 @@ public class CurrentDataFragment extends Fragment{
         pieData_co.add(new SliceValue(100));
 
         pieChartData_co = new PieChartData(pieData_co);
+        pieChartData_co.setHasLabels(true).setValueLabelTextSize(14);
         pieChartData_co.setHasCenterCircle(true).setCenterText1("CO").setCenterText1FontSize(25);
         pieChartView_co.setPieChartData(pieChartData_co);
 
@@ -109,8 +117,7 @@ public class CurrentDataFragment extends Fragment{
                 int co = Integer.parseInt(coVal.getText().toString());
 
                 CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
-
-                ref.setValue(currentValue);
+                ref.child(authData.getUid()).setValue(currentValue);
             }
         });
     }
@@ -118,17 +125,16 @@ public class CurrentDataFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        final int pm_r = 17, pm_b = 18;
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CurrentValue currentValue = dataSnapshot.getValue(CurrentValue.class);
+                CurrentValue currentValue = dataSnapshot.child(authData.getUid()).getValue(CurrentValue.class);
                 pieChartData_co.setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
 
 
                 pieData_pm.clear();
-                pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED).setLabel("Red"));
-                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.BLUE).setLabel("Blue"));
+                pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED));
+                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.BLUE));
 
                 pieData_voc.clear();
                 pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
@@ -152,34 +158,3 @@ public class CurrentDataFragment extends Fragment{
 
 }
 
-class CurrentValue {
-    int pmValue, vocValue, co2Value, coValue;
-
-    public CurrentValue() {
-    }
-
-    public CurrentValue(int pmValue,int vocValue,int co2Value,int coValue) {
-        this.pmValue = pmValue;
-        this.vocValue = vocValue;
-        this.co2Value = co2Value;
-        this.coValue = coValue;
-    }
-
-    public int getPmValue() {
-        return pmValue;
-    }
-
-    public int getVocValue() {
-        return vocValue;
-    }
-
-    public int getCo2Value() {
-        return co2Value;
-    }
-
-    public int getCoValue() {
-        return coValue;
-    }
-
-
-}

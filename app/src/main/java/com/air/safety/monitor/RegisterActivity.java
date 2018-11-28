@@ -205,10 +205,16 @@ public class RegisterActivity extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Current Data");
+
         //insert into users node
         reference.child(getString(R.string.node_users))
                 .child(userid)
                 .setValue(mUser);
+
+        CurrentValue currentValue = new CurrentValue(5, 5, 5, 5);
+        ref.child(userid).setValue(currentValue);
 
         FirebaseAuth.getInstance().signOut();
         redirectLoginScreen();
