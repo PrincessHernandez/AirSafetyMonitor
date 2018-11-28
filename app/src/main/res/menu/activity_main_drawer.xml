@@ -23,7 +23,7 @@
         <item
             android:id="@+id/nav_call"
             android:icon="@drawable/ic_menu_message"
-            android:title="Emergency Call" />
+            android:title="Emergency" />
     </group>
 
     <item android:title="Other">
