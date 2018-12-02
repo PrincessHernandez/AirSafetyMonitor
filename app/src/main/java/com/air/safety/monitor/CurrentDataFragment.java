@@ -39,9 +39,7 @@ public class CurrentDataFragment extends Fragment{
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
 
-    //PieChartView pieChartView_pm, pieChartView_voc, pieChartView_co2, pieChartView_co;
     PieChartView pieChartView[] = new PieChartView[4];
-    //List<SliceValue> pieData_pm, pieData_voc, pieData_co2, pieData_co;
     List<SliceValue> pieData[] = new List[4];
     PieChartData pieChartData[] = new PieChartData[4];
     String gas_n[] = {"PM", "VOC", "CO2", "CO"};
@@ -69,12 +67,11 @@ public class CurrentDataFragment extends Fragment{
         pieChartView[3] = myView.findViewById(R.id.chart_co);
 
         for (int i=0; i < 4; i++){
-
             pieData[i] = new ArrayList<>();
             pieData[i].add(new SliceValue(100));
 
             pieChartData[i] = new PieChartData(pieData[i]);
-            pieChartData[i].setHasLabels(true).setValueLabelTextSize(14);
+            //pieChartData[i].setHasLabels(true).setValueLabelTextSize(14);
             pieChartData[i].setHasCenterCircle(true).setCenterText1(gas_n[i]).setCenterText1FontSize(25);
             pieChartView[i].setPieChartData(pieChartData[i]);
         }
@@ -107,27 +104,19 @@ public class CurrentDataFragment extends Fragment{
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
                     CurrentValue currentValue = myDataSnapshot.getValue(CurrentValue.class);
-                    pieChartData[3].setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
+                    int ValArr[] = {currentValue.getPmValue(),currentValue.getVocValue(),currentValue.getCo2Value(),currentValue.getCoValue()};
 
-                    pieData[0].clear();
-                    pieData[0].add(new SliceValue(currentValue.getPmValue(), Color.RED));
-                    pieData[0].add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
+                    for (int i=0; i < 4; i++){
+                        pieData[i].clear();
+                        pieData[i].add(new SliceValue(ValArr[i], Color.RED));
+                        pieData[i].add(new SliceValue(100-ValArr[i], Color.LTGRAY));
+                        pieChartData[i].setHasCenterCircle(true).setCenterText1(gas_n[i]+": " + Integer.toString(ValArr[i])+"%").setCenterText1FontSize(25);
+                    }
 
-                    pieData[1].clear();
-                    pieData[1].add(new SliceValue(currentValue.getVocValue(), Color.RED));
-                    pieData[1].add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
-
-                    pieData[2].clear();
-                    pieData[2].add(new SliceValue(currentValue.getCo2Value(), Color.RED));
-                    pieData[2].add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
-
-                    pieData[3].clear();
-                    pieData[3].add(new SliceValue(currentValue.getCoValue(), Color.RED));
-                    pieData[3].add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
                 }
-
             }
 
             @Override
