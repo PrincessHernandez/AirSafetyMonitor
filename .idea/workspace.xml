@@ -21,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
@@ -51,11 +52,11 @@
       <file leaf-file-name="CurrentDataFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/CurrentDataFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170">
-              <caret line="73" column="10" lean-forward="true" selection-start-line="73" selection-start-column="10" selection-end-line="73" selection-end-column="10" />
+            <state relative-caret-position="238">
+              <caret line="103" column="77" lean-forward="true" selection-start-line="103" selection-start-column="77" selection-end-line="103" selection-end-column="77" />
               <folding>
-                <element signature="e#3056#3647#0" expanded="true" />
-                <element signature="e#3646#3647#0" expanded="true" />
+                <element signature="e#2612#3203#0" expanded="true" />
+                <element signature="e#3202#3203#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2557,8 +2558,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="74" />
-    <option name="y" value="-25" />
+    <option name="x" value="80" />
+    <option name="y" value="51" />
     <option name="width" value="900" />
     <option name="height" value="735" />
   </component>
@@ -2922,7 +2923,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543741125111</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update code to array v2">
+      <created>1543741675238</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1543741675238</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3005,7 +3013,8 @@
     <MESSAGE value="design update" />
     <MESSAGE value="add timestamp" />
     <MESSAGE value="update code to array" />
-    <option name="LAST_COMMIT_MESSAGE" value="update code to array" />
+    <MESSAGE value="update code to array v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update code to array v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -3094,8 +3103,8 @@
         <state relative-caret-position="142">
           <caret line="156" column="33" lean-forward="false" selection-start-line="156" selection-start-column="33" selection-end-line="156" selection-end-column="33" />
           <folding>
-            <element signature="e#3056#3647#0" expanded="true" />
-            <element signature="e#3646#3647#0" expanded="true" />
+            <element signature="e#2612#3203#0" expanded="true" />
+            <element signature="e#3202#3203#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3439,11 +3448,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/CurrentDataFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="73" column="10" lean-forward="true" selection-start-line="73" selection-start-column="10" selection-end-line="73" selection-end-column="10" />
+        <state relative-caret-position="238">
+          <caret line="103" column="77" lean-forward="true" selection-start-line="103" selection-start-column="77" selection-end-line="103" selection-end-column="77" />
           <folding>
-            <element signature="e#3056#3647#0" expanded="true" />
-            <element signature="e#3646#3647#0" expanded="true" />
+            <element signature="e#2612#3203#0" expanded="true" />
+            <element signature="e#3202#3203#0" expanded="true" />
           </folding>
         </state>
       </provider>

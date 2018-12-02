@@ -66,16 +66,6 @@ public class CurrentDataFragment extends Fragment{
         pieChartView[2] = myView.findViewById(R.id.chart_co2);
         pieChartView[3] = myView.findViewById(R.id.chart_co);
 
-        for (int i=0; i < 4; i++){
-            pieData[i] = new ArrayList<>();
-            pieData[i].add(new SliceValue(100));
-
-            pieChartData[i] = new PieChartData(pieData[i]);
-            //pieChartData[i].setHasLabels(true).setValueLabelTextSize(14);
-            pieChartData[i].setHasCenterCircle(true).setCenterText1(gas_n[i]).setCenterText1FontSize(25);
-            pieChartView[i].setPieChartData(pieChartData[i]);
-        }
-
         setListeners();
 
         return myView;
@@ -110,10 +100,14 @@ public class CurrentDataFragment extends Fragment{
                     int ValArr[] = {currentValue.getPmValue(),currentValue.getVocValue(),currentValue.getCo2Value(),currentValue.getCoValue()};
 
                     for (int i=0; i < 4; i++){
-                        pieData[i].clear();
+                        pieData[i] = new ArrayList<>();
                         pieData[i].add(new SliceValue(ValArr[i], Color.RED));
                         pieData[i].add(new SliceValue(100-ValArr[i], Color.LTGRAY));
+
+                        pieChartData[i] = new PieChartData(pieData[i]);
+                        //pieChartData[i].setHasLabels(true).setValueLabelTextSize(14);
                         pieChartData[i].setHasCenterCircle(true).setCenterText1(gas_n[i]+": " + Integer.toString(ValArr[i])+"%").setCenterText1FontSize(25);
+                        pieChartView[i].setPieChartData(pieChartData[i]);
                     }
 
                 }
