@@ -1,7 +1,12 @@
 package com.air.safety.monitor;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CurrentValue {
     int pmValue, vocValue, co2Value, coValue;
+    Long timestamp;
 
     public CurrentValue() {
     }
@@ -11,6 +16,8 @@ public class CurrentValue {
         this.vocValue = vocValue;
         this.co2Value = co2Value;
         this.coValue = coValue;
+
+        this.timestamp = System.currentTimeMillis();
     }
 
     public int getPmValue() {

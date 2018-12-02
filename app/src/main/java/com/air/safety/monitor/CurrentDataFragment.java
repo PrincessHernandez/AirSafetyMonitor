@@ -35,7 +35,7 @@ public class CurrentDataFragment extends Fragment{
     EditText pmVal, vocVal, co2Val, coVal;
     Button btnCData;
     FirebaseDatabase database;
-    DatabaseReference ref;
+    DatabaseReference ref, ref2;
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
 
@@ -58,6 +58,7 @@ public class CurrentDataFragment extends Fragment{
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Current Data");
+        ref2 = database.getReference(authData.getUid());
 
 // ----------------- PM
         pieChartView_pm = myView.findViewById(R.id.chart_pm);
@@ -109,7 +110,7 @@ public class CurrentDataFragment extends Fragment{
         btnCData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = ref.push().getKey();
+                String id = ref2.push().getKey();
 
                 int pm = Integer.parseInt(pmVal.getText().toString());
                 int voc = Integer.parseInt(vocVal.getText().toString());
@@ -117,7 +118,7 @@ public class CurrentDataFragment extends Fragment{
                 int co = Integer.parseInt(coVal.getText().toString());
 
                 CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
-                ref.child(authData.getUid()).setValue(currentValue);
+                ref2.child(id).setValue(currentValue);
             }
         });
     }
@@ -125,28 +126,30 @@ public class CurrentDataFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        ref.addValueEventListener(new ValueEventListener() {
+        ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CurrentValue currentValue = dataSnapshot.child(authData.getUid()).getValue(CurrentValue.class);
-                pieChartData_co.setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
+                for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
+                    CurrentValue currentValue = myDataSnapshot.getValue(CurrentValue.class);
+                    pieChartData_co.setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
 
+                    pieData_pm.clear();
+                    pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED));
+                    pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
 
-                pieData_pm.clear();
-                pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED));
-                pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
+                    pieData_voc.clear();
+                    pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
+                    pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
 
-                pieData_voc.clear();
-                pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
-                pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
+                    pieData_co2.clear();
+                    pieData_co2.add(new SliceValue(currentValue.getCo2Value(), Color.RED));
+                    pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
 
-                pieData_co2.clear();
-                pieData_co2.add(new SliceValue(currentValue.getCo2Value(), Color.RED));
-                pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
+                    pieData_co.clear();
+                    pieData_co.add(new SliceValue(currentValue.getCoValue(), Color.RED));
+                    pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
+                }
 
-                pieData_co.clear();
-                pieData_co.add(new SliceValue(currentValue.getCoValue(), Color.RED));
-                pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
             }
 
             @Override
