@@ -36,5 +36,6 @@ public class CurrentValue {
         return coValue;
     }
 
+    public long gettimestamp() { return  timestamp; }
 
 }

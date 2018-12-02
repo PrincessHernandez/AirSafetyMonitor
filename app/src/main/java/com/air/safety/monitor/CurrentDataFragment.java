@@ -35,7 +35,7 @@ public class CurrentDataFragment extends Fragment{
     EditText pmVal, vocVal, co2Val, coVal;
     Button btnCData;
     FirebaseDatabase database;
-    DatabaseReference ref, ref2;
+    DatabaseReference ref;
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
 
@@ -58,8 +58,7 @@ public class CurrentDataFragment extends Fragment{
         btnCData = (Button) myView.findViewById(R.id.btn_current_data);
 
         database = FirebaseDatabase.getInstance();
-        ref = database.getReference("Current Data");
-        ref2 = database.getReference(authData.getUid());
+        ref = database.getReference(authData.getUid());
 
         pieChartView[0] = myView.findViewById(R.id.chart_pm);
         pieChartView[1] = myView.findViewById(R.id.chart_voc);
@@ -75,7 +74,7 @@ public class CurrentDataFragment extends Fragment{
         btnCData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = ref2.push().getKey();
+                String id = ref.push().getKey();
 
                 int pm = Integer.parseInt(pmVal.getText().toString());
                 int voc = Integer.parseInt(vocVal.getText().toString());
@@ -83,7 +82,7 @@ public class CurrentDataFragment extends Fragment{
                 int co = Integer.parseInt(coVal.getText().toString());
 
                 CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
-                ref2.child(id).setValue(currentValue);
+                ref.child(id).setValue(currentValue);
             }
         });
     }
@@ -91,7 +90,7 @@ public class CurrentDataFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        ref2.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

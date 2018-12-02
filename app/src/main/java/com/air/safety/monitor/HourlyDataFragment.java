@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +34,9 @@ public class HourlyDataFragment extends Fragment{
     GraphView graphView;
     LineGraphSeries graphSeries;
 
+    FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH.mm.ss");
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +50,7 @@ public class HourlyDataFragment extends Fragment{
         graphView.addSeries(graphSeries);
 
         database = FirebaseDatabase.getInstance();
-        ref = database.getReference("Hourly Data");
+        ref = database.getReference(authData.getUid());
 
         setListeners();
 
@@ -72,14 +80,21 @@ public class HourlyDataFragment extends Fragment{
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DataPoint[] dp = new DataPoint[(int) dataSnapshot.getChildrenCount()];
+                DataPoint[] dp_pm = new DataPoint[(int) dataSnapshot.getChildrenCount()];
+                DataPoint[] dp_voc = new DataPoint[(int) dataSnapshot.getChildrenCount()];
+                //DataPoint[] dp_co2 = new DataPoint[(int) dataSnapshot.getChildrenCount()];
+                //DataPoint[] dp_co = new DataPoint[(int) dataSnapshot.getChildrenCount()];
                 int index = 0;
                 for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
-                    PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp[index] = new DataPoint(pointValue.getxValue(),pointValue.getyValue());
+                    CurrentValue currentValue = myDataSnapshot.getValue(CurrentValue.class);
+                    Timestamp timestamp = new Timestamp(currentValue.gettimestamp());
+                    //int ValArr[] = {currentValue.getPmValue(),currentValue.getVocValue(),currentValue.getCo2Value(),currentValue.getCoValue()};
+
+                    //PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
+                    dp_pm[index] = new DataPoint(currentValue.gettimestamp(),currentValue.getPmValue());
                     index++;
                 }
-                graphSeries.resetData(dp);
+                graphSeries.resetData(dp_pm);
             }
 
             @Override
