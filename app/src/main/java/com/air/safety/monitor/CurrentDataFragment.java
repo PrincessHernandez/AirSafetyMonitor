@@ -39,9 +39,12 @@ public class CurrentDataFragment extends Fragment{
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
 
-    PieChartView pieChartView_pm, pieChartView_voc, pieChartView_co2, pieChartView_co;
-    List<SliceValue> pieData_pm, pieData_voc, pieData_co2, pieData_co;
-    PieChartData pieChartData_pm, pieChartData_voc, pieChartData_co2, pieChartData_co;
+    //PieChartView pieChartView_pm, pieChartView_voc, pieChartView_co2, pieChartView_co;
+    PieChartView pieChartView[] = new PieChartView[4];
+    //List<SliceValue> pieData_pm, pieData_voc, pieData_co2, pieData_co;
+    List<SliceValue> pieData[] = new List[4];
+    PieChartData pieChartData[] = new PieChartData[4];
+    String gas_n[] = {"PM", "VOC", "CO2", "CO"};
 
     private static final String TAG = "tag me";
 
@@ -60,46 +63,21 @@ public class CurrentDataFragment extends Fragment{
         ref = database.getReference("Current Data");
         ref2 = database.getReference(authData.getUid());
 
-// ----------------- PM
-        pieChartView_pm = myView.findViewById(R.id.chart_pm);
-        pieData_pm = new ArrayList<>();
-        pieData_pm.add(new SliceValue(100));
+        pieChartView[0] = myView.findViewById(R.id.chart_pm);
+        pieChartView[1] = myView.findViewById(R.id.chart_voc);
+        pieChartView[2] = myView.findViewById(R.id.chart_co2);
+        pieChartView[3] = myView.findViewById(R.id.chart_co);
 
-        pieChartData_pm = new PieChartData(pieData_pm);
-        pieChartData_pm.setHasLabels(true).setValueLabelTextSize(14);
-        pieChartData_pm.setHasCenterCircle(true).setCenterText1("PM").setCenterText1FontSize(25);
-        pieChartView_pm.setPieChartData(pieChartData_pm);
+        for (int i=0; i < 4; i++){
 
-// ----------------- VOC
-        pieChartView_voc = myView.findViewById(R.id.chart_voc);
-        pieData_voc = new ArrayList<>();
-        pieData_voc.add(new SliceValue(100));
+            pieData[i] = new ArrayList<>();
+            pieData[i].add(new SliceValue(100));
 
-        pieChartData_voc = new PieChartData(pieData_voc);
-        pieChartData_voc.setHasLabels(true).setValueLabelTextSize(14);
-        pieChartData_voc.setHasCenterCircle(true).setCenterText1("VOC").setCenterText1FontSize(25);
-        pieChartView_voc.setPieChartData(pieChartData_voc);
-
-// ----------------- CO2
-        pieChartView_co2 = myView.findViewById(R.id.chart_co2);
-        pieData_co2 = new ArrayList<>();
-        pieData_co2.add(new SliceValue(100));
-
-        pieChartData_co2 = new PieChartData(pieData_co2);
-        pieChartData_co2.setHasLabels(true).setValueLabelTextSize(14);
-        pieChartData_co2.setHasCenterCircle(true).setCenterText1("CO2").setCenterText1FontSize(25);
-        pieChartView_co2.setPieChartData(pieChartData_co2);
-
-
-// ----------------- CO
-        pieChartView_co = myView.findViewById(R.id.chart_co);
-        pieData_co = new ArrayList<>();
-        pieData_co.add(new SliceValue(100));
-
-        pieChartData_co = new PieChartData(pieData_co);
-        pieChartData_co.setHasLabels(true).setValueLabelTextSize(14);
-        pieChartData_co.setHasCenterCircle(true).setCenterText1("CO").setCenterText1FontSize(25);
-        pieChartView_co.setPieChartData(pieChartData_co);
+            pieChartData[i] = new PieChartData(pieData[i]);
+            pieChartData[i].setHasLabels(true).setValueLabelTextSize(14);
+            pieChartData[i].setHasCenterCircle(true).setCenterText1(gas_n[i]).setCenterText1FontSize(25);
+            pieChartView[i].setPieChartData(pieChartData[i]);
+        }
 
         setListeners();
 
@@ -131,23 +109,23 @@ public class CurrentDataFragment extends Fragment{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
                     CurrentValue currentValue = myDataSnapshot.getValue(CurrentValue.class);
-                    pieChartData_co.setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
+                    pieChartData[3].setHasCenterCircle(true).setCenterText1("CO: "+Integer.toString(currentValue.getCoValue()) +"%").setCenterText1FontSize(25);
 
-                    pieData_pm.clear();
-                    pieData_pm.add(new SliceValue(currentValue.getPmValue(), Color.RED));
-                    pieData_pm.add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
+                    pieData[0].clear();
+                    pieData[0].add(new SliceValue(currentValue.getPmValue(), Color.RED));
+                    pieData[0].add(new SliceValue(100-currentValue.getPmValue(), Color.LTGRAY));
 
-                    pieData_voc.clear();
-                    pieData_voc.add(new SliceValue(currentValue.getVocValue(), Color.RED));
-                    pieData_voc.add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
+                    pieData[1].clear();
+                    pieData[1].add(new SliceValue(currentValue.getVocValue(), Color.RED));
+                    pieData[1].add(new SliceValue(100-currentValue.getVocValue(), Color.LTGRAY));
 
-                    pieData_co2.clear();
-                    pieData_co2.add(new SliceValue(currentValue.getCo2Value(), Color.RED));
-                    pieData_co2.add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
+                    pieData[2].clear();
+                    pieData[2].add(new SliceValue(currentValue.getCo2Value(), Color.RED));
+                    pieData[2].add(new SliceValue(100-currentValue.getCo2Value(), Color.LTGRAY));
 
-                    pieData_co.clear();
-                    pieData_co.add(new SliceValue(currentValue.getCoValue(), Color.RED));
-                    pieData_co.add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
+                    pieData[3].clear();
+                    pieData[3].add(new SliceValue(currentValue.getCoValue(), Color.RED));
+                    pieData[3].add(new SliceValue(100-currentValue.getCoValue(), Color.LTGRAY));
                 }
 
             }
