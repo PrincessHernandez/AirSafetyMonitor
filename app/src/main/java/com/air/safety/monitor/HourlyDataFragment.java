@@ -1,5 +1,6 @@
 package com.air.safety.monitor;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -54,6 +55,9 @@ public class HourlyDataFragment extends Fragment{
         for (int i=0; i < 4; i++) {
             graphView.addSeries(series[i]);
         }
+        series[1].setColor(Color.GREEN);
+        series[2].setColor(Color.RED);
+        series[3].setColor(Color.YELLOW);
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference(authData.getUid());
