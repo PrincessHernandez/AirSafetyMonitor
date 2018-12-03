@@ -213,8 +213,9 @@ public class RegisterActivity extends AppCompatActivity {
                 .child(userid)
                 .setValue(mUser);
 
-        CurrentValue currentValue = new CurrentValue(5, 5, 5, 5);
-        ref.child(userid).setValue(currentValue);
+        String id = ref.push().getKey();
+        CurrentValue currentValue = new CurrentValue(20, 20, 20, 20);
+        ref.child(id).setValue(currentValue);
 
         FirebaseAuth.getInstance().signOut();
         redirectLoginScreen();
