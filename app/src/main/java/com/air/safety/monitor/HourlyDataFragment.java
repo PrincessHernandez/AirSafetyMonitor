@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -35,7 +37,7 @@ public class HourlyDataFragment extends Fragment{
     LineGraphSeries graphSeries;
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH.mm.ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     @Nullable
     @Override
@@ -51,6 +53,17 @@ public class HourlyDataFragment extends Fragment{
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference(authData.getUid());
+
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
+        {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if(isValueX) {
+                    return  sdf.format(new Date((long) value));
+                }
+                return super.formatLabel(value, isValueX);
+            }
+        });
 
         setListeners();
 
@@ -87,11 +100,11 @@ public class HourlyDataFragment extends Fragment{
                 int index = 0;
                 for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
                     CurrentValue currentValue = myDataSnapshot.getValue(CurrentValue.class);
-                    Timestamp timestamp = new Timestamp(currentValue.gettimestamp());
+                    //Timestamp timestamp = new Timestamp(currentValue.gettimestamp());
                     //int ValArr[] = {currentValue.getPmValue(),currentValue.getVocValue(),currentValue.getCo2Value(),currentValue.getCoValue()};
 
                     //PointValue pointValue = myDataSnapshot.getValue(PointValue.class);
-                    dp_pm[index] = new DataPoint(currentValue.gettimestamp(),currentValue.getPmValue());
+                    dp_pm[index] = new DataPoint(currentValue.getDate(),currentValue.getPmValue());
                     index++;
                 }
                 graphSeries.resetData(dp_pm);

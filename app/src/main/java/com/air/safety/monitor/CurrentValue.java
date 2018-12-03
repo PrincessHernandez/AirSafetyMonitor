@@ -6,7 +6,8 @@ import java.util.Date;
 
 public class CurrentValue {
     int pmValue, vocValue, co2Value, coValue;
-    Long timestamp;
+    Date date = new Date();
+    //Long timestamp;
 
     public CurrentValue() {
     }
@@ -17,7 +18,8 @@ public class CurrentValue {
         this.co2Value = co2Value;
         this.coValue = coValue;
 
-        this.timestamp = System.currentTimeMillis();
+        //this.timestamp = System.currentTimeMillis();
+        this.date.getTime();
     }
 
     public int getPmValue() {
@@ -36,6 +38,6 @@ public class CurrentValue {
         return coValue;
     }
 
-    public long gettimestamp() { return  timestamp; }
+    public Date getDate() { return  date; }
 
 }
