@@ -233,7 +233,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-
+                                Toast.makeText(mContext, "Sending email for Verification", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Toast.makeText(mContext, "couldn't send email", Toast.LENGTH_SHORT).show();

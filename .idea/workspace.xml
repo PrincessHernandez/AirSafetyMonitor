@@ -13,14 +13,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="594029a0-d5ef-4318-8238-e73ed1b5a7a3" name="Default" comment="register update">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <list default="true" id="594029a0-d5ef-4318-8238-e73ed1b5a7a3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/RegisterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/RegisterActivity.java" />
     </list>
@@ -62,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/RegisterActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="217" column="45" lean-forward="false" selection-start-line="217" selection-start-column="45" selection-end-line="217" selection-end-column="45" />
+              <caret line="229" column="27" lean-forward="true" selection-start-line="229" selection-start-column="27" selection-end-line="229" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -2967,7 +2960,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543803132975</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="register update">
+      <created>1543803450656</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1543803450656</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3058,7 +3058,8 @@
     <MESSAGE value="HDF array" />
     <MESSAGE value="HDF color" />
     <MESSAGE value="land HDF.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="land HDF.xml" />
+    <MESSAGE value="register update" />
+    <option name="LAST_COMMIT_MESSAGE" value="register update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3503,7 +3504,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="217" column="45" lean-forward="false" selection-start-line="217" selection-start-column="45" selection-end-line="217" selection-end-column="45" />
+          <caret line="229" column="27" lean-forward="true" selection-start-line="229" selection-start-column="27" selection-end-line="229" selection-end-column="27" />
           <folding />
         </state>
       </provider>
