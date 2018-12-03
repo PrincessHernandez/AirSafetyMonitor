@@ -113,11 +113,11 @@
       <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="22" column="30" lean-forward="false" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
               <folding>
-                <element signature="e#2618#2911#0" expanded="true" />
-                <element signature="e#2910#2911#0" expanded="true" />
+                <element signature="e#2530#2823#0" expanded="true" />
+                <element signature="e#2822#2823#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2998,7 +2998,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543803511666</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="delete old code">
+      <created>1543803731001</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1543803731001</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3090,7 +3097,8 @@
     <MESSAGE value="HDF color" />
     <MESSAGE value="land HDF.xml" />
     <MESSAGE value="register update" />
-    <option name="LAST_COMMIT_MESSAGE" value="register update" />
+    <MESSAGE value="delete old code" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete old code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3534,11 +3542,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="22" column="30" lean-forward="false" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
           <folding>
-            <element signature="e#2618#2911#0" expanded="true" />
-            <element signature="e#2910#2911#0" expanded="true" />
+            <element signature="e#2530#2823#0" expanded="true" />
+            <element signature="e#2822#2823#0" expanded="true" />
           </folding>
         </state>
       </provider>
