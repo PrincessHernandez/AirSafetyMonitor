@@ -31,14 +31,15 @@ public class HourlyDataFragment extends Fragment{
     View myView;
     EditText xVal, yVal;
     Button btnInsert;
+
     FirebaseDatabase database;
     DatabaseReference ref;
     GraphView graphView;
-    LineGraphSeries graphSeries, graphSeries2, graphSeries3, graphSeries4;
+    LineGraphSeries series[] = {new LineGraphSeries(), new LineGraphSeries(), new LineGraphSeries(), new LineGraphSeries()};
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-    // HH:mm:ss
+    // HH:mm:ss or
 
     @Nullable
     @Override
@@ -50,17 +51,9 @@ public class HourlyDataFragment extends Fragment{
         btnInsert = (Button) myView.findViewById(R.id.btn_insert);
         graphView = (GraphView) myView.findViewById(R.id.graph);
 
-        graphSeries=new LineGraphSeries();
-        graphView.addSeries(graphSeries);
-
-        graphSeries2=new LineGraphSeries();
-        graphView.addSeries(graphSeries2);
-
-        graphSeries3=new LineGraphSeries();
-        graphView.addSeries(graphSeries3);
-
-        graphSeries4=new LineGraphSeries();
-        graphView.addSeries(graphSeries4);
+        for (int i=0; i < 4; i++) {
+            graphView.addSeries(series[i]);
+        }
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference(authData.getUid());
@@ -105,9 +98,6 @@ public class HourlyDataFragment extends Fragment{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataPoint[][] dp = new DataPoint[4][(int) dataSnapshot.getChildrenCount()];
-                //DataPoint[] dp_voc = new DataPoint[(int) dataSnapshot.getChildrenCount()];
-                //DataPoint[] dp_co2 = new DataPoint[(int) dataSnapshot.getChildrenCount()];
-                //DataPoint[] dp_co = new DataPoint[(int) dataSnapshot.getChildrenCount()];
 
                 int index = 0;
                 for(DataSnapshot myDataSnapshot : dataSnapshot.getChildren()){
@@ -117,16 +107,12 @@ public class HourlyDataFragment extends Fragment{
                     for (int i=0; i < 4; i++) {
                         dp[i][index] = new DataPoint(currentValue.getDate(),ValArr[i]);
                     }
-                    //dp_pm[index] = new DataPoint(currentValue.getDate(),currentValue.getPmValue());
-                    //dp_voc[index] = new DataPoint(currentValue.getDate(),currentValue.getVocValue());
-                    //dp_co2[index] = new DataPoint(currentValue.getDate(),currentValue.getCo2Value());
-                    //dp_co[index] = new DataPoint(currentValue.getDate(),currentValue.getCoValue());
                     index++;
                 }
-                graphSeries.resetData(dp[0]);
-                graphSeries2.resetData(dp[1]);
-                graphSeries3.resetData(dp[2]);
-                graphSeries4.resetData(dp[3]);
+
+                for (int i=0; i < 4; i++) {
+                    series[i].resetData(dp[i]);
+                }
             }
 
             @Override
