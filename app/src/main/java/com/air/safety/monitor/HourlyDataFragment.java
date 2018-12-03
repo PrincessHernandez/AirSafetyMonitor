@@ -1,7 +1,6 @@
 package com.air.safety.monitor;
 
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -32,6 +31,7 @@ public class HourlyDataFragment extends Fragment{
     View myView;
     EditText xVal, yVal;
     Button btnInsert;
+    String gas_n[] = {"pm", "voc", "co2", "co"};
 
     FirebaseDatabase database;
     DatabaseReference ref;
@@ -54,10 +54,15 @@ public class HourlyDataFragment extends Fragment{
 
         for (int i=0; i < 4; i++) {
             graphView.addSeries(series[i]);
+            series[i].setTitle(gas_n[i]);
         }
         series[1].setColor(Color.GREEN);
         series[2].setColor(Color.RED);
         series[3].setColor(Color.YELLOW);
+
+        // legend
+        graphView.getLegendRenderer().setVisible(true);
+        graphView.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference(authData.getUid());
