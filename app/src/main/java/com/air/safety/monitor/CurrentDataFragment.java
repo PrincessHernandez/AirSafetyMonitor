@@ -82,7 +82,11 @@ public class CurrentDataFragment extends Fragment{
                 int co = Integer.parseInt(coVal.getText().toString());
 
                 CurrentValue currentValue = new CurrentValue(pm, voc, co2, co);
-                ref.child(id).setValue(currentValue);
+
+                if (pm!=0 && voc!=0 && co2!=0 && co!=0) {
+                    ref.child(id).setValue(currentValue);
+                }
+
             }
         });
     }
