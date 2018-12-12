@@ -51,9 +51,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 //        mapFragment.getMapAsync(this);
 
 
-        ChildEventListener mChildEventListener;
-        mRef= FirebaseDatabase.getInstance().getReference(authData.getUid());
-        mRef.push().setValue(marker);
+
         return myView;
     }
 
@@ -62,6 +60,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        ChildEventListener mChildEventListener;
+        mRef= FirebaseDatabase.getInstance().getReference(authData.getUid());
+        mRef.push().setValue(marker);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 //        // Add a marker in Humber and move the camera
 //        LatLng latLng = new LatLng(43.731380, -79.597420);
-//        mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+//        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
 //        //mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
 //        float zoomLevel = 16.0f; //This goes up to 21
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
@@ -120,10 +121,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng coordinates = new LatLng(latitu[0], longitu[0]);
 
-
         mMap.addMarker(new MarkerOptions().position(coordinates).title("Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,20f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,15f));
 
     }
 }
