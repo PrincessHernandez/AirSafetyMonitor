@@ -17,19 +17,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.LocationRequest;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     View myView;
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
+    private ChildEventListener mChildEventListener;
+    private DatabaseReference mUsers;
+    Marker marker;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,11 +45,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 //    }
 //        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
+
+        //
+        ChildEventListener mChildEventListener;
+        mUsers= FirebaseDatabase.getInstance().getReference("users");
+        mUsers.push().setValue(marker);
         return myView;
-    }
-
-    private void checkLocationPermission() {
-
     }
 
     @Override
@@ -57,11 +64,29 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Humber and move the camera
-        LatLng latLng = new LatLng(43.731380, -79.597420);
-        mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
-        float zoomLevel = 16.0f; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+//        // Add a marker in Humber and move the camera
+//        LatLng latLng = new LatLng(43.731380, -79.597420);
+//        mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+//        //mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
+//        float zoomLevel = 16.0f; //This goes up to 21
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+
+        googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener)this);
+        //googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+                    Coordinates user = s.getValue(Coordinates.class);
+                    LatLng location = new LatLng(user.latitude, user.longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title("Marker"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

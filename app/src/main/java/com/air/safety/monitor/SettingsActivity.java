@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;*/
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,13 +38,16 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mRead, mWrite;
+    private Button mRead, mWrite, mSend, mProceed;
+    private EditText et_lng, et_lat;
     private static final String TAG = "test";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("data test");
+    DatabaseReference myRef = database.getReference("users");
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         mRead = (Button) findViewById(R.id.buttonRead);
         mWrite = (Button) findViewById(R.id.buttonWrite);
-
-
+        mSend = (Button) findViewById(R.id.btn_send);
+        mProceed = (Button) findViewById(R.id.btn_proceed);
+        et_lng = (EditText)findViewById(R.id.et_longitude);
+        et_lat = (EditText)findViewById(R.id.et_latitude);
 
         mRead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +98,37 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+
+        mSend.setOnClickListener(this);
+
+        mProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, new MapsFragment())
+                        .commit();
+            }
+        });
     }
 
+    // Saves user longitude and latitude
+    private void sendCoordinates(){
+        double latitude= Double.parseDouble(et_lat.getText().toString().trim());
+        double longitude= Double.parseDouble(et_lng.getText().toString().trim());
+        Coordinates userInformation=new Coordinates(latitude,longitude);
+        myRef.child("users").setValue(userInformation);
+        Toast.makeText(this,"Sent",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==mProceed){
+            finish();
+        }
+        if (v==mSend){
+            sendCoordinates();
+            et_lng.getText().clear();
+            et_lat.getText().clear();
+        }
+    }
 }
