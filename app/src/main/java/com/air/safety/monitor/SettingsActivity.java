@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +45,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private Button mRead, mWrite, mSend, mProceed;
     private EditText et_lng, et_lat;
     private static final String TAG = "test";
-
+    FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("users");
+    DatabaseReference myRef = database.getReference().child(authData.getUid());
 
     FragmentManager fragmentManager = getSupportFragmentManager();
 
