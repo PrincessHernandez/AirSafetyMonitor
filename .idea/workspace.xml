@@ -19,13 +19,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/MapsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/MapsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/SettingsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/SettingsActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,8 +48,8 @@
       <file leaf-file-name="MapsFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/MapsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="122" column="50" lean-forward="true" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
+            <state relative-caret-position="332">
+              <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2852,8 +2849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/air/safety/monitor/MapsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="122" column="50" lean-forward="true" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
+        <state relative-caret-position="332">
+          <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
