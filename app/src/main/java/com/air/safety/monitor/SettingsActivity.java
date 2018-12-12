@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private static final String TAG = "test";
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference().child(authData.getUid());
+    DatabaseReference myRef = database.getReference(authData.getUid());
 
     FragmentManager fragmentManager = getSupportFragmentManager();
 
