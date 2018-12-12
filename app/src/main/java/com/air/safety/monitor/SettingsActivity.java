@@ -1,29 +1,41 @@
 package com.air.safety.monitor;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
+/*
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;*/
+
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Locale;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -33,80 +45,53 @@ public class SettingsActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("data test");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Spinner mLanguage = (Spinner) findViewById(R.id.spLanguage);
-        final TextView mTextView = (TextView) findViewById(R.id.textView);
-
-        ArrayAdapter mAdapter = new ArrayAdapter<String>(SettingsActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.language_option));
-        mLanguage.setAdapter(mAdapter);
-
-        SharedPreferences.Editor editor = getPreferences(0).edit();
-
-        if (LocaleHelper.getLanguage(SettingsActivity.this).equalsIgnoreCase("en")) {
-            mLanguage.setSelection(mAdapter.getPosition("English"));
-        } else if (LocaleHelper.getLanguage(SettingsActivity.this).equalsIgnoreCase("fr")) {
-            mLanguage.setSelection(mAdapter.getPosition("French"));
-        }
+        mRead = (Button) findViewById(R.id.buttonRead);
+        mWrite = (Button) findViewById(R.id.buttonWrite);
 
 
-        int selectedPosition = mLanguage.getSelectedItemPosition();
-        editor.putInt("spinnerSelection", selectedPosition);
-        editor.commit();
 
-        mLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        mRead.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Context context;
-                Resources resources;
-                switch (i) {
-                    case 0:
-                        context = LocaleHelper.setLocale(SettingsActivity.this, "en");
-                        resources = context.getResources();
-                        mTextView.setText(resources.getString(R.string.text_translation));
-                        break;
-                        /*
-                        Locale locale = new Locale("en");
-                        Locale.setDefault(locale);
+            public void onClick(View view) {
+                EditText sdata = (EditText) findViewById(R.id.senddata);
+                String sinput = sdata.getText().toString();
 
-                        Resources res = view.getResources();
-                        Configuration config = new Configuration(res.getConfiguration());
-                        config.locale = locale;
-                        res.updateConfiguration(config, res.getDisplayMetrics());
-                        //Toast.makeText(this, "Locale in English !", Toast.LENGTH_LONG).show();
-                        break;*/
-                    case 1:
-                        context = LocaleHelper.setLocale(SettingsActivity.this, "fr");
-                        resources = context.getResources();
-                        mTextView.setText(resources.getString(R.string.text_translation));
-                        break;
-                        /*
-                        Locale locale2 = new Locale("fr");
-                        Locale.setDefault(locale2);
+                myRef.setValue(sinput);
 
-                        Resources res2 = view.getResources();
-                        Configuration config2 = new Configuration(res2.getConfiguration());
-                        config2.locale = locale2;
-                        res2.updateConfiguration(config2, res2.getDisplayMetrics());
-                        //Toast.makeText(this, "Locale in English !", Toast.LENGTH_LONG).show();
-                        break;*/
-                }
             }
+        });
 
+        mWrite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onClick(View view) {
+                //FirebaseDatabase database = FirebaseDatabase.getInstance();
+                //DatabaseReference myRef = database.getReference("message");
+                //myRef.setValue("Hello, World!");
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        //Log.d(TAG, "Value is: " + value);
+                        TextView t2 = (TextView) findViewById(R.id.getdata);
+                        t2.setText("Value is: " + value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
 
             }
         });
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LocaleHelper.onAttach(newBase));
-    }
 }
