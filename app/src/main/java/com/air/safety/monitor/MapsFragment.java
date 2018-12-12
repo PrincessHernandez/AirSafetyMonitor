@@ -58,8 +58,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Humber and move the camera
-        LatLng humberCollege = new LatLng(43.731380, -79.597420);
-        mMap.addMarker(new MarkerOptions().position(humberCollege).title("Marker at Humber College"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
+        LatLng latLng = new LatLng(43.731380, -79.597420);
+        mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(humberCollege));
+        float zoomLevel = 16.0f; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
     }
 }
