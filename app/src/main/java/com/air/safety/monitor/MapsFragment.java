@@ -93,6 +93,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 //            }
 //        });
 
+        //decalre object
         final Double[] latitu = {43.731380};
         final Double[] longitu = {-79.597420};
 
