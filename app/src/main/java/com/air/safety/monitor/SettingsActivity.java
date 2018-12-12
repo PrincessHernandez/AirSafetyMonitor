@@ -116,15 +116,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         double latitude= Double.parseDouble(et_lat.getText().toString().trim());
         double longitude= Double.parseDouble(et_lng.getText().toString().trim());
         Coordinates userInformation=new Coordinates(latitude,longitude);
-        myRef.child("location").setValue(userInformation);
+        myRef.child("coordinates").setValue(userInformation);
         Toast.makeText(this,"Sent",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onClick(View v) {
-        if(v==mProceed){
-            finish();
-        }
+//        if(v==mProceed){
+//            finish();
+//        }
         if (v==mSend){
             sendCoordinates();
             et_lng.getText().clear();
