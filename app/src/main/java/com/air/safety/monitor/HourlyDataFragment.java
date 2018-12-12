@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class HourlyDataFragment extends Fragment{
     LineGraphSeries series[] = {new LineGraphSeries(), new LineGraphSeries(), new LineGraphSeries(), new LineGraphSeries()};
 
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM d\nHH:mm");
     // HH:mm:ss or
 
     @Nullable
@@ -58,7 +59,7 @@ public class HourlyDataFragment extends Fragment{
         }
         series[1].setColor(Color.GREEN);
         series[2].setColor(Color.RED);
-        series[3].setColor(Color.YELLOW);
+        series[3].setColor(Color.MAGENTA);
 
         // legend
         graphView.getLegendRenderer().setVisible(true);

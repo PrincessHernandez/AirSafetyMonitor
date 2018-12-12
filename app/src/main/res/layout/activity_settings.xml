@@ -7,59 +7,24 @@
     tools:context=".SettingsActivity"
     android:background="@color/white">
 
-    <TextView
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="first_preferencescreen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting Menu"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="55dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        >
-
-
-
-        <EditText
-            android:id="@+id/senddata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Send data"
-            android:layout_marginTop="15dp"/>
-
-        <TextView
-            android:id="@+id/getdata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Get data"
-            android:textSize="20sp"
-            android:gravity="center_horizontal"/>
+        <CheckBoxPreference
+            android:key="wifi enabled"
+            android:title="WiFi" />
+        <PreferenceScreen
+            android:key="second_preferencescreen"
+            android:title="WiFi settings">
+            <CheckBoxPreference
+                android:key="prefer wifi"
+                android:title="Prefer WiFi" />
+            ... other preferences here ...
+        </PreferenceScreen>
+    </PreferenceScreen>
 
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/buttonRead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="173dp"
-        android:layout_marginStart="56dp"
-        android:text="Read" />
-
-    <Button
-        android:id="@+id/buttonWrite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/buttonRead"
-        android:layout_marginEnd="75dp"
-        android:text="Write" />
 </RelativeLayout>
