@@ -103,19 +103,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                latitu[0] = (Double)
-                        dataSnapshot.child("lat").getValue();
-                longitu[0] = (Double)
-                        dataSnapshot.child("lon").getValue();
+                latitu[0] = (Double)dataSnapshot.child("lat").getValue();
+                longitu[0] = (Double)dataSnapshot.child("lon").getValue();
 
-                Log.d("LatLon", latitu[0] + longitu[0] +"");
-                //Toast.makeText(LiveTrain.this, latitu[0].toString()+" - "+ longitu[0].toString(), Toast.LENGTH_SHORT).show();
+                //Log.d("LatLon", latitu[0] + longitu[0] +"");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError)
             {
-                Log.w("Exception FB",databaseError.toException());
+                //Log.w("Exception FB",databaseError.toException());
             }
         });
 

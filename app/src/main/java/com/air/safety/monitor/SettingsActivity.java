@@ -1,13 +1,4 @@
 package com.air.safety.monitor;
-/*
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;*/
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -42,7 +33,7 @@ import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mRead, mWrite, mSend, mProceed;
+    private Button mSend, mProceed;
     private EditText et_lng, et_lat;
     private static final String TAG = "test";
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
@@ -56,50 +47,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mRead = (Button) findViewById(R.id.buttonRead);
-        mWrite = (Button) findViewById(R.id.buttonWrite);
         mSend = (Button) findViewById(R.id.btn_send);
         mProceed = (Button) findViewById(R.id.btn_proceed);
         et_lng = (EditText)findViewById(R.id.et_longitude);
         et_lat = (EditText)findViewById(R.id.et_latitude);
 
-        mRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText sdata = (EditText) findViewById(R.id.senddata);
-                String sinput = sdata.getText().toString();
-
-                myRef.setValue(sinput);
-
-            }
-        });
-
-        mWrite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //FirebaseDatabase database = FirebaseDatabase.getInstance();
-                //DatabaseReference myRef = database.getReference("message");
-                //myRef.setValue("Hello, World!");
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String value = dataSnapshot.getValue(String.class);
-                        //Log.d(TAG, "Value is: " + value);
-                        TextView t2 = (TextView) findViewById(R.id.getdata);
-                        t2.setText("Value is: " + value);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
-
-            }
-        });
 
         mSend.setOnClickListener(this);
 
