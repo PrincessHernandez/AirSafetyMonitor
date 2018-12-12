@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     View myView;
     private GoogleMap mMap;
     private ChildEventListener mChildEventListener;
-    private DatabaseReference mUsers;
+    private DatabaseReference mRef;
     FirebaseUser authData = FirebaseAuth.getInstance().getCurrentUser() ;
     Marker marker;
 
@@ -51,8 +52,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 
         ChildEventListener mChildEventListener;
-        mUsers= FirebaseDatabase.getInstance().getReference(authData.getUid());
-        mUsers.push().setValue(marker);
+        mRef= FirebaseDatabase.getInstance().getReference(authData.getUid());
+        mRef.push().setValue(marker);
         return myView;
     }
 
@@ -74,22 +75,54 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 //        float zoomLevel = 16.0f; //This goes up to 21
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
 
-        googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener)this);
-        //googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-        mUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+//        googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener)this);
+//        //googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+//        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot s : dataSnapshot.getChildren()) {
+//                    Coordinates user = s.getValue(Coordinates.class);
+//                    LatLng location = new LatLng(user.latitude, user.longitude);
+//                    mMap.addMarker(new MarkerOptions().position(location).title("Marker"));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        final Double[] latitu = {43.731380};
+        final Double[] longitu = {-79.597420};
+
+        mRef = FirebaseDatabase.getInstance().getReference().child("coordinates");
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot s : dataSnapshot.getChildren()) {
-                    Coordinates user = s.getValue(Coordinates.class);
-                    LatLng location = new LatLng(user.latitude, user.longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title("Marker"));
-                }
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                latitu[0] = (Double)
+                        dataSnapshot.child("lat").getValue();
+                longitu[0] = (Double)
+                        dataSnapshot.child("lon").getValue();
+
+                Log.d("LatLon", latitu[0] + longitu[0] +"");
+                //Toast.makeText(LiveTrain.this, latitu[0].toString()+" - "+ longitu[0].toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onCancelled(DatabaseError databaseError)
+            {
+                Log.w("Exception FB",databaseError.toException());
             }
         });
+
+        LatLng coordinates = new LatLng(latitu[0], longitu[0]);
+
+
+        mMap.addMarker(new MarkerOptions().position(coordinates).title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,20f));
+
     }
 }
