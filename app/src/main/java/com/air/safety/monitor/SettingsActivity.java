@@ -1,11 +1,17 @@
 package com.air.safety.monitor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,46 +35,54 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // mRead = (Button) findViewById(R.id.buttonRead);
-        //mWrite = (Button) findViewById(R.id.buttonWrite);
+        Spinner mLanguage = (Spinner) findViewById(R.id.spLanguage);
+        final TextView mTextView = (TextView) findViewById(R.id.textView);
 
-        /*
-        mRead.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter mAdapter = new ArrayAdapter<String>(SettingsActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.language_option));
+        mLanguage.setAdapter(mAdapter);
+
+        SharedPreferences.Editor editor = getPreferences(0).edit();
+
+        if (LocaleHelper.getLanguage(SettingsActivity.this).equalsIgnoreCase("en")) {
+            mLanguage.setSelection(mAdapter.getPosition("English"));
+        } else if (LocaleHelper.getLanguage(SettingsActivity.this).equalsIgnoreCase("fr")) {
+            mLanguage.setSelection(mAdapter.getPosition("French"));
+        }
+
+
+        int selectedPosition = mLanguage.getSelectedItemPosition();
+        editor.putInt("spinnerSelection", selectedPosition);
+        editor.commit();
+
+        mLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View view) {
-                EditText sdata = (EditText) findViewById(R.id.senddata);
-                String sinput = sdata.getText().toString();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Context context;
+                Resources resources;
+                switch (i) {
+                    case 0:
+                        context = LocaleHelper.setLocale(SettingsActivity.this, "en");
+                        resources = context.getResources();
+                        mTextView.setText(resources.getString(R.string.text_translation));
+                        break;
+                    case 1:
+                        context = LocaleHelper.setLocale(SettingsActivity.this, "fr");
+                        resources = context.getResources();
+                        mTextView.setText(resources.getString(R.string.text_translation));
+                        break;
+                }
+            }
 
-                myRef.setValue(sinput);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-        */
-
-        /*
-        mWrite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String value = dataSnapshot.getValue(String.class);
-                        TextView t2 = (TextView) findViewById(R.id.getdata);
-                        t2.setText("Value is: " + value);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
-            }
-        });
-        */
     }
 
-
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
 }

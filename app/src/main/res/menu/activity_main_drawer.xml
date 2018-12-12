@@ -4,14 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_profile"
-            android:title="Profile" />
-        <item
-            android:id="@+id/nav_maps"
-            android:icon="@drawable/ic_menu_map_"
-            android:title="Maps" />
+
         <item
             android:id="@+id/nav_current_data"
             android:icon="@drawable/ic_menu_current_data"
@@ -20,6 +13,10 @@
             android:id="@+id/nav_hourly_data"
             android:icon="@drawable/ic_menu_hourly_data"
             android:title="Hourly Data" />
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/ic_menu_map_"
+            android:title="Maps" />
         <item
             android:id="@+id/nav_call"
             android:icon="@drawable/ic_menu_message"
@@ -36,6 +33,10 @@
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_logout"
                 android:title="Logout" />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_menu_info"
+                android:title="About Us" />
         </menu>
     </item>
 
