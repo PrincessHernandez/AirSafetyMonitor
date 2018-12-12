@@ -2,6 +2,7 @@ package com.air.safety.monitor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -66,11 +70,31 @@ public class SettingsActivity extends AppCompatActivity {
                         resources = context.getResources();
                         mTextView.setText(resources.getString(R.string.text_translation));
                         break;
+                        /*
+                        Locale locale = new Locale("en");
+                        Locale.setDefault(locale);
+
+                        Resources res = view.getResources();
+                        Configuration config = new Configuration(res.getConfiguration());
+                        config.locale = locale;
+                        res.updateConfiguration(config, res.getDisplayMetrics());
+                        //Toast.makeText(this, "Locale in English !", Toast.LENGTH_LONG).show();
+                        break;*/
                     case 1:
                         context = LocaleHelper.setLocale(SettingsActivity.this, "fr");
                         resources = context.getResources();
                         mTextView.setText(resources.getString(R.string.text_translation));
                         break;
+                        /*
+                        Locale locale2 = new Locale("fr");
+                        Locale.setDefault(locale2);
+
+                        Resources res2 = view.getResources();
+                        Configuration config2 = new Configuration(res2.getConfiguration());
+                        config2.locale = locale2;
+                        res2.updateConfiguration(config2, res2.getDisplayMetrics());
+                        //Toast.makeText(this, "Locale in English !", Toast.LENGTH_LONG).show();
+                        break;*/
                 }
             }
 
