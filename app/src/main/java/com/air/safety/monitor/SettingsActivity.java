@@ -52,7 +52,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         et_lng = (EditText)findViewById(R.id.et_longitude);
         et_lat = (EditText)findViewById(R.id.et_latitude);
 
-
         mSend.setOnClickListener(this);
 
         mProceed.setOnClickListener(new View.OnClickListener() {
